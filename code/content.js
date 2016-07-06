@@ -1,7 +1,5 @@
-$('#gridcontainer').on({
-    'mousewheel': function(e) {
-        if (e.target.id == 'el') return;
-        e.preventDefault();
-        e.stopPropagation();
-    }
-})
+document.getElementById('nav').addEventListener(
+  'mousewheel',
+  function (e) { e.preventDefault(); e.stopPropagation(); },
+  true
+);
