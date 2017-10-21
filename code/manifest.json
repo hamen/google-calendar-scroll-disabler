@@ -1,7 +1,7 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "Google Calendar Scroll Disabler",
-	"version": "0.2",
+	"version": "0.3",
 	"icons": {
 		"16": "icon16.png",
 		"48": "icon48.png"
