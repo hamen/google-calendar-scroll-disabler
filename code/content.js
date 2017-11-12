@@ -1,11 +1,9 @@
 var calendar_grid = document.querySelector('div[role="grid"]');
+
 var body = document.querySelector('body');
 
 var disable_scroll = function () {
-// Get a handle on the calendar grid
     $('div[role="grid"]').on('mousewheel', function (e) {
-
-        // Scrolling.... hahhahahaha I don't think so
         if (e.target.id == 'el') return;
         e.preventDefault();
         e.stopPropagation();
@@ -19,7 +17,6 @@ var mutation_breaks_scroll_blocker = function (mutation) {
     }
 };
 
-
 var calendar_observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         if (mutation_breaks_scroll_blocker(mutation)) {
@@ -28,14 +25,14 @@ var calendar_observer = new MutationObserver(function (mutations) {
     });
 });
 
-
-// Wait for the first part of the page to load
-$(document).ready(function () {
+var observe_if_calendar_available = function () {
     if (!calendar_grid) {
         window.setTimeout(observe_if_calendar_available, 500);
         return;
     }
-
-    // start observer
     calendar_observer.observe(body, {attributes: true});
+};
+
+$(document).ready(function () {
+    observe_if_calendar_available();
 });
