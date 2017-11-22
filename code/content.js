@@ -1,18 +1,20 @@
-var calendar_grid = document.querySelector('div[role="grid"]');
-
+var calendar_grid_selector = 'div[role="grid"]';
 var body = document.querySelector('body');
+var calendar_grid = document.querySelectorAll(calendar_grid_selector);
 
 var disable_scroll = function () {
-    $('div[role="grid"]').on('mousewheel', function (e) {
-        if (e.target.id == 'el') return;
-        e.preventDefault();
-        e.stopPropagation();
-    });
+    for (var live_selector of document.querySelectorAll(calendar_grid_selector)) {
+        live_selector.addEventListener('mousewheel', function (e) {
+            if (e.target.id == 'el') return;
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    }
 };
 
 var mutation_breaks_scroll_blocker = function (mutation) {
     if (mutation.attributeName && mutation.attributeName == 'data-viewfamily') {
-        if ($('body').attr('data-viewfamily') == 'EVENT')
+        if (body.getAttribute('data-viewfamily') == 'EVENT')
             return true;
     }
 };
@@ -33,6 +35,4 @@ var observe_if_calendar_available = function () {
     calendar_observer.observe(body, {attributes: true});
 };
 
-$(document).ready(function () {
-    observe_if_calendar_available();
-});
+observe_if_calendar_available();
