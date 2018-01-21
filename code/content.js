@@ -1,17 +1,38 @@
-// Wait for the first part of the page to load
-$(document).ready(function () {
+var calendar_grid_selector = 'div[role="grid"]';
+var body = document.querySelector('body');
+var calendar_grid = document.querySelectorAll(calendar_grid_selector);
 
-    // Wait for the rest of the fancy dynamic stuff to load.
-    // 5 seconds should be enough.
-    setTimeout(function () {
-
-        // Get a handle on the calendar grid
-        $('div[role="grid"]').on('mousewheel', function (e) {
-            
-            // Scrolling.... hahhahahaha I don't think so
+var disable_scroll = function () {
+    for (var live_selector of document.querySelectorAll(calendar_grid_selector)) {
+        live_selector.addEventListener('mousewheel', function (e) {
             if (e.target.id == 'el') return;
             e.preventDefault();
             e.stopPropagation();
         });
-    }, 5000);
+    }
+};
+
+var mutation_breaks_scroll_blocker = function (mutation) {
+    if (mutation.attributeName && mutation.attributeName == 'data-viewfamily') {
+        if (body.getAttribute('data-viewfamily') == 'EVENT')
+            return true;
+    }
+};
+
+var calendar_observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (mutation_breaks_scroll_blocker(mutation)) {
+            disable_scroll();
+        }
+    });
 });
+
+var observe_if_calendar_available = function () {
+    if (!calendar_grid) {
+        window.setTimeout(observe_if_calendar_available, 500);
+        return;
+    }
+    calendar_observer.observe(body, {attributes: true});
+};
+
+observe_if_calendar_available();

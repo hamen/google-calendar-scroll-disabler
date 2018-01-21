@@ -1,17 +1,19 @@
 {
-	"manifest_version": 3,
-	"name": "Google Calendar Scroll Disabler",
-	"version": "0.3",
-	"icons": {
-		"16": "icon16.png",
-		"48": "icon48.png"
-		},
-	"content_scripts": [
-		{
-			"matches": [
-			"https://calendar.google.com/calendar/*"
-			],
-			"js": ["jquery-3.2.1.min.js", "content.js"]
-		}
-	]
+  "manifest_version": 3,
+  "name": "Google Calendar Scroll Disabler",
+  "version": "0.3",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
 }
