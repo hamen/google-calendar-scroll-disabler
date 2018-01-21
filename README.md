@@ -11,5 +11,16 @@ You can find the latest version on the Chrome WebStore:
 
 [https://chrome.google.com/webstore/detail/google-calendar-scroll-di/nghndfiaocgpmcbeafglhknklfgddebe](https://chrome.google.com/webstore/detail/google-calendar-scroll-di/nghndfiaocgpmcbeafglhknklfgddebe)
 
+## Changelog
+
+**0.4** - This update solves our issue with the new Material Design UI. I greatly thank [Martin](https://github.com/apphancer) for his help with this.
+
 ## Credits
+Code contributors:
+
+[Martin](https://github.com/apphancer)
+
 App icon is by [Maxim Basinski](https://www.iconfinder.com/vasabii)
+
+## License
+Please, refer to [LICENSE](./LICENSE)
