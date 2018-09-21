@@ -1,11 +1,14 @@
 var calendar_grid_selector = 'div[role="grid"]';
 var body = document.querySelector('body');
 var calendar_grid = document.querySelectorAll(calendar_grid_selector);
+var month_selector = 'div[data-active-view="month"]';
 
 var disable_scroll = function () {
     for (var live_selector of document.querySelectorAll(calendar_grid_selector)) {
         live_selector.addEventListener('mousewheel', function (e) {
             if (e.target.id == 'el') return;
+            // Only disable scrolling when the calendar is in "Month" view
+            if (document.querySelectorAll(month_selector).length === 0) return;
             e.preventDefault();
             e.stopPropagation();
         });
