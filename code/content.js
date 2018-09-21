@@ -36,3 +36,9 @@ var observe_if_calendar_available = function () {
 };
 
 observe_if_calendar_available();
+
+// Disable scrolling once at startup.
+// Note that the data-viewfamily mutation doesn't occur when the page is loaded.
+// Rather, the data-viewfamily mutation only occurs when the user changes views.
+// Thus, we need to disable scrolling once when the page is initially loaded.
+disable_scroll();
