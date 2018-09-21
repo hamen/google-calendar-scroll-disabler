@@ -21,7 +21,7 @@ var mutation_breaks_scroll_blocker = function (mutation) {
 
 var calendar_observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
-        if (!mutation_breaks_scroll_blocker(mutation)) {
+        if (mutation_breaks_scroll_blocker(mutation)) {
             disable_scroll();
         }
     });
