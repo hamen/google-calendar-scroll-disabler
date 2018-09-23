@@ -14,10 +14,7 @@ var disable_scroll = function () {
 };
 
 var mutation_breaks_scroll_blocker = function (mutation) {
-    if (mutation.attributeName && mutation.attributeName == 'data-viewfamily') {
-        if (body.getAttribute('data-viewfamily') == 'EVENT')
-            return true;
-    }
+    return (mutation.attributeName && mutation.attributeName == 'data-viewfamily' && body.getAttribute('data-viewfamily') == 'EVENT');
 };
 
 var overlay_observer = new MutationObserver(function (mutations) {
@@ -38,7 +35,7 @@ var observe_if_calendar_available = function () {
         return;
     }
     overlay_observer.observe(body, {attributes: true});
-    calendar_observer.observe(element_to_check, {childList: true});
+    calendar_observer.observe(element_to_observe, {childList: true});
 };
 
 observe_if_calendar_available();
