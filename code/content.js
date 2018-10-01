@@ -1,29 +1,26 @@
-var calendar_grid_selector = 'div[role="grid"]';
+var calendar_main_selector = 'div[role="main"]';
 var body = document.querySelector('body');
 
-var disable_scroll = function () {
-    for (var live_selector of document.querySelectorAll(calendar_grid_selector)) {
-        live_selector.addEventListener('mousewheel', function (e) {
-            if (e.target.id == 'el') return;
-            e.preventDefault();
-            e.stopPropagation();
-        });
-    }
-};
+var mousewheelHander = function (e) {
+    if (e.target.id == 'el')
+        return;
+    e.preventDefault();
+    e.stopPropagation();
+}
 
-var mutation_breaks_scroll_blocker = function (mutation) {
-    if (mutation.attributeName && mutation.attributeName == 'data-viewfamily') {
-        if (body.getAttribute('data-viewfamily') == 'EVENT')
-            return true;
+var disable_scroll = function () {
+    for (var live_selector of document.querySelectorAll(calendar_main_selector)) {
+        // Remove the event handler before adding a new one to make sure
+        // we don't have multiple event handlers registered.
+        live_selector.removeEventListener('mousewheel', mousewheelHander, true);
+        live_selector.addEventListener('mousewheel', mousewheelHander, true);
     }
 };
 
 var calendar_observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-        if (mutation_breaks_scroll_blocker(mutation)) {
-            disable_scroll();
-        }
-    });
+    // A change on the webpage may replace the "main" div, so we need to
+    // re-register the event handler.
+    disable_scroll();
 });
 calendar_observer.observe(body, {attributes: true});
 
