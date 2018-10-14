@@ -13,6 +13,8 @@ You can find the latest version on the Chrome WebStore:
 
 ## Changelog
 
+**0.5** - This update solves our issue with the new Material Design UI. I greatly thank [Martin](https://github.com/apphancer) for his help with this, again 😄
+
 **0.4** - This update solves our issue with the new Material Design UI. I greatly thank [Martin](https://github.com/apphancer) for his help with this.
 
 ## Credits
